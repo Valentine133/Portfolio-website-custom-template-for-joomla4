@@ -1,0 +1,606 @@
+// Home Middle
+
+// Первый экран 
+.moduletable {
+    
+    &.first-screen {
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(circle, rgb($brand-secondary-light,25%), rgb($brand-secondary,10%));
+
+        @media (min-width: $screen-lg-min) {
+            height: 100vh;
+        }
+
+        .mod-custom, .container, .row {
+            height: 100%;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+
+            .row {
+                
+                @media  (max-width: $screen-sm-max) {
+                    @include flex-wrap();
+                    @include flex-direction(column);
+                    @include justify-content(center);
+                    min-height: 100vh;
+                }
+            }
+        }
+    }
+
+    .first-screen {
+
+        &__title {
+            @include flexbox;
+            @include justify-content(center);
+            @include flex-direction(column);
+
+            @media  (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+                padding-top: 7vh;
+            }
+
+            // FIO 
+            svg.intro {
+
+                .text {
+                    display: none;
+                }
+
+                &.go {
+                    #text1 {
+                        text {
+                            opacity: 0.4;
+                        }
+                    }
+
+                    .text {
+                        font-family: $ff-g;
+                        font-size: 28px;
+                        // text-transform: uppercase;
+                        display: block;
+                    }
+
+                    .text-stroke {
+                        fill: none;
+                        stroke: rgba(0, 119, 182, 0.5);
+                        stroke-width: 3.8px;
+                        stroke-dashoffset: -900;
+                        stroke-dasharray: 900;
+                        stroke-linecap: butt;
+                        stroke-linejoin: round;
+                        animation: dash 2.5s ease-in-out forwards;
+                    }
+
+                    .text-stroke:nth-child(2) {
+                        animation-delay: .3s;
+                    }
+
+                    .text-stroke:nth-child(3) {
+                        animation-delay: .9s;
+                    }
+
+                    .text-stroke-2 {
+                        stroke: #00b4d8;
+                        animation-delay: 1.2s;
+                    }
+
+                    .text-stroke:nth-child(5) {
+                        animation-delay: 1.5s;
+                    }
+
+                    .text-stroke:nth-child(6) {
+                        animation-delay: 1.8s;
+                    }
+                }
+            }
+
+            @keyframes dash {
+                100% {
+                    stroke-dashoffset: 0;
+                }
+            }
+
+            #logo {
+                max-width: 100%;
+            }
+
+            .reload {
+                position: absolute;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        &__image {
+            @media  (min-width: $screen-md-min) {
+                @include flexbox;
+                @include align-items(flex-end);
+                padding-top: 5rem;
+            }
+
+            img {
+                object-fit: contain; 
+                @include transition(.6s ease-in-out);
+
+                @media  (min-width: $screen-lg-min) {
+                    // min-width: 370px; 
+                    height: 90vh;
+
+                    &:hover {
+                        @include translate(1rem,0);
+                    }
+                }
+
+                @media  (max-width: $screen-sm-max) {
+                    display: none;
+                }
+            }
+
+            .social-wrapper {
+                 @media  (min-width: $screen-md-min) {
+                    @include abs(50%,1.5rem);
+                    @include translate(0,-50%);
+                }
+
+                @media  (max-width: $screen-sm-max) {
+                    .navbar-nav {
+                        @include flex-direction(row);
+                        padding: 2rem 0;
+
+                        .nav-item {
+                            margin-right: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Skills & About me section 
+.about-wrapper {
+    background: $body-bg;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+
+    &:before {
+        content: '';
+        @include abs(0,0,0,0);
+        width: 100%;
+        height: 100%;
+        background: rgba($brand-secondary, 0.2);
+        z-index: 0;
+    }
+
+    .skills-title {
+        @include abs(15rem,auto,auto,4vh);
+        @include fz(120);
+        font-weight: 700;
+        color: rgb($white, 13%);
+        z-index: 1;
+    }
+
+    #skills {
+        padding-top: 7rem;
+        padding-bottom: 7rem;
+        position: relative;
+        z-index: 5;
+
+        @media (max-width: $screen-sm-max) {
+           padding-top: 5rem;
+           padding-bottom: 4rem;
+        }
+
+        .skills{
+
+            &.animation {
+                .skill-per {
+                    animation: fillBars 4s 1;
+                }
+            }
+
+            .skill {
+                margin-bottom: 1.5rem;
+
+                &-name{
+                    font-weight: 500;
+                    color: $white;
+                    margin: 10px 0;
+                    }
+
+                &-bar{
+                    height: 14px;
+                    background: rgb($brand-secondary-light,50%);
+                    border-radius: 0.5rem;
+                }
+
+                &-per{
+                    height: 14px;
+                    background: $brand-primary;
+                    border-radius: 0.5rem;
+                    position: relative;
+                }
+
+                &-per::before{
+                    content: attr(per);
+                    position: absolute;
+                    padding: 4px 6px;
+                    @include fz(18);
+                    top: -40px;
+                    right: 0;
+                    transform: translateX(50%);
+                }
+            }
+        }
+
+        @keyframes fillBars{
+            from{
+                width: 0;
+            }
+            to{
+                width: 100%;
+            }
+        }
+    }
+}
+
+// Toolbox 
+.moduletable.toolbox {
+    .tools {
+        &__item {
+            &-icon {
+                min-height: 80px;
+                @include transition(.2s ease-in-out);
+
+                i {
+                    @include fz(80);
+                    color: $brand-primary;
+                }
+            }
+
+            @media (min-width: $screen-lg-min) {
+                &:hover {
+                    .tools__item-icon {
+                        @include translate(0,-0.75rem);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// My Portfolio 
+.portfolio-categories {
+    overflow: hidden;
+    position: relative;
+
+    .projects-title {
+        @include abs(41rem,4vh);
+        @include fz(120);
+        font-weight: 700;
+        color: rgb($white, 13%);
+        z-index: 1;
+
+        // @media (min-width: $screen-xxl-min) {
+        //     top: 90vh;
+        // }
+
+        @media (max-width: $screen-sm-max) {
+            @include abs(118vh,auto,auto,4vh);
+            @include fz(90);
+        }
+    }
+
+    .portfolio {
+       padding-top: 7rem;
+        padding-bottom: 7rem;
+        position: relative;
+        z-index: 5;
+
+        @media (max-width: $screen-sm-max) {
+           padding-top: 5rem;
+           padding-bottom: 4rem;
+        } 
+
+        .filter-button-group {
+            position: relative;
+            z-index: 5;
+
+            button {
+                background: none;
+                border: 0;
+                color: $white;
+                padding: 1rem 1.5rem;
+                margin: 0;
+                text-transform: uppercase;
+                position: relative;
+                @include transition(.2s ease-in-out);
+
+                @media (min-width: $screen-md-min) and (max-width: $screen-lg-max) {
+                    padding: 0.75rem;
+                }
+
+                &.active {
+                    color: $brand-primary;
+
+                    &::after {
+                        width: 100%;
+                        background: $brand-primary;
+                    }
+                }
+
+                &::before {
+                    content: '';
+                    width: 100%;
+                    height: 4px;
+                    background: rgb($brand-secondary-light,50%);
+                    @include abs(auto,0,0,0);
+                }
+
+                &::after {
+                    content: '';
+                    width: 0;
+                    height: 4px;
+                    background: $brand-primary;
+                    @include abs(auto,0,0,0);
+                    @include transition(.2s ease-in-out);
+                }
+
+                &:hover {
+                    &::after {
+                        width: 100%;
+                        background: $brand-primary;
+                    }
+                }
+
+                @media (max-width: $screen-sm-max) {
+                    width: 100%;
+                }
+            }
+        }
+
+        // Isotop 
+        .grid {
+            @media (min-width: $screen-lg-min) {
+                margin-top: -110px;
+
+                &__item {
+                    &.block-1 {
+                        height: 150px;
+                    }
+
+                    &.block-2 {
+                        height: 70px;
+                    }
+                }
+            }
+        }
+
+        &-item {
+            position: relative;
+            border-radius: 1em;
+            overflow: hidden;
+            @include flexbox();
+            @include align-items(center);
+            @include justify-content(center);
+
+            &::before {
+                content: '';
+                @include abs(50%,50%);
+                @include translate(50%,-50%);
+                width: 1px;
+                height: 1px;
+                border-radius: 50%;
+                background: rgb($brand-secondary,80%);
+                opacity: 0;
+                visibility: hidden;
+                @include transition(.45s ease-out);
+            }
+
+            &__name {
+                @include abs(50%,50%);
+                @include translate(50%,-70%);
+                width: 100%;
+                padding: 1rem;
+                color: $white;
+                opacity: 0;
+                visibility: hidden;
+                @include transition(.25s ease-in-out);
+                @include transition-delay(0.25s);
+
+                .tags {
+                    &__item {
+                        background: $brand-primary;
+                        color: $white;
+                        padding: 0.1rem 0.25rem;
+                        border-radius: 0.3em;
+                        @include fz(14);
+                        font-weight: 500;
+
+                        &:not(:first-child) {
+                            margin-left: 0.5rem;
+                        }
+                    }
+                }
+
+                .divider {
+                    margin: 0.5rem auto 1rem;
+                    height: 3px;
+                    width: 100px;
+                    background: $brand-primary;
+                }
+
+                .introtext {
+                    display: none;
+
+                    @media (min-width: $screen-xl-min) {
+                        display: block;
+                    }
+                }
+
+                .tools-list {
+                    i {
+                        @include fz(28);
+                        color: $brand-primary;
+                    }
+                }
+            }
+
+            @media (min-width: $screen-lg-min) {
+                &:hover {
+
+                    &::before {
+                        width: 1200px;
+                        height: 1200px;
+                        opacity: 1;
+                        visibility: visible;
+                    }
+
+                    .portfolio-item__name {
+                        @include translate(50%,-50%);
+                        border-radius: 0;
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Contact me
+.moduletable.contacts {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    background: rgb($white, 5%);
+    position: relative;
+    z-index: 5;
+    overflow: hidden;
+    border-top: 2px solid rgb($brand-primary, 20%);
+    border-bottom: 2px solid rgb($brand-primary, 20%);
+
+    @media (max-width: $screen-sm-max) {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+    a {
+        @include transition(.25s ease-in-out);
+
+        > [class*="fa"] {
+            color: $brand-primary;
+            @include fz(22);
+        }
+
+        &:hover {
+            color: $brand-primary;
+        }
+    }
+}
+
+// Модуль Соцсетей 
+.moduletable.social-contacts {
+    .navbar-nav {
+        .nav-item {
+            margin-right: 1.5rem;
+
+            > a {
+                color: $white;
+                padding: 0.5rem 0 1rem;
+                position: relative;
+                @include fz(22);
+
+                &::before {
+                    content: '';
+                    width: 100%;
+                    height: 4px;
+                    background: rgb($brand-secondary-light,50%);
+                    @include abs(auto,0,0,0);
+                }
+
+                &::after {
+                    content: '';
+                    width: 0;
+                    height: 4px;
+                    background: $brand-primary;
+                    @include abs(auto,0,0,0);
+                    @include transition(.2s ease-in-out);
+                }
+
+                &:hover {
+                    color: $brand-primary;
+
+                    &::after {
+                        width: 100%;
+                        background: $brand-primary;
+                    }
+                }
+
+                [class*="fa"] {
+                    display: none;
+                }
+
+                span + span {
+                    display: inline-block !important;
+                }
+            }
+        }
+    }
+}
+
+// Модуль Соцсетей Первый экран
+.moduletable.social-menu {
+
+    .navbar-nav {
+        .nav-item {
+            margin-bottom: 1rem;
+
+            a {
+                @include flexbox;
+                @include align-items(center);
+                @include justify-content(center);
+                overflow: hidden;
+                border: 3px solid $brand-primary;
+                border-radius: 5em;
+                width: 50px;
+                height: 50px;
+                @include transition(.2s ease-in-out);
+                margin-left: auto;
+
+                span[class*='fa'] {
+                    @include fz(24);
+                    color: $brand-primary;
+                    padding: 0.75rem;
+                }
+
+                span:last-child {
+                    visibility: hidden;
+                    opacity: 0;
+                    width: 0;
+                    @include transition(.3s ease-in-out .1s);
+                }
+
+                @media  (min-width: $screen-lg-min) {
+                    &:hover {
+                        width: 100%;
+                        padding-right: 1rem;
+
+                        span {
+
+                            &:last-child {
+                                visibility: visible;
+                                opacity: 1;
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

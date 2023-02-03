@@ -1,0 +1,112 @@
+// Header
+
+.header {
+    padding: 1rem 0;
+    @include transition(.2s ease-in-out);
+
+    @media  (min-width: $screen-lg-min) {
+       padding: 2rem 0;
+    }
+
+    &.scroller {
+        background-color : rgb($body-bg, 30%);
+        @include backdrop-filter-blur(0.5rem); 
+        padding: 1rem 0;
+    }
+
+    &__wrapper {
+        @include flexbox;
+        @include justify-content(space-between);
+        @include align-items(center);
+    }
+
+    &__logo {
+        img {
+            width: 130px;
+
+            @media  (max-width: $screen-sm-max) {
+                width: 90px;
+            }
+        }
+    }
+
+    &__navigation {
+        @include flexbox;
+        @include align-items(center);
+
+        .navbar-nav {
+            @include flex-direction(row);
+            padding: 0 35px 0 0.5rem;
+            border: 3px solid $brand-primary;
+            border-right: none;
+            border-radius: 5em 0% 0% 5em;
+            clip-path: ellipse(0 50% at 100% 50%);
+            min-height: 54px;
+            @include transition(0.35s ease-in-out);
+
+            @media  (max-width: $screen-sm-max) {
+                padding-left: 0;
+                padding-right: 30px;
+            }
+
+            > .nav-item {
+                padding: 0;
+
+                > .nav-link {
+                    @include fz(16);
+                    padding: 0.7rem 1rem;
+                    @include transition(0.35s ease-in-out);
+                    @include translate(10px, 0);
+
+                    @media  (max-width: $screen-sm-max) {
+                        padding: 0.7rem 0.75rem;
+                    }
+
+                    &:hover, &.active {
+                        color: $brand-primary;
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            &.open {
+                clip-path: ellipse(100% 100% at 50% 50%);
+
+                .nav-link {
+                    @include translate(0, 0);
+                }
+            }
+        }
+
+        .btn-bars {
+            color: $brand-primary;
+            padding: 0.2rem;
+            border-radius: 5em;
+            border: 3px solid $brand-primary;
+            background: transparent;
+            width: 54px;
+            height: 54px;
+            margin-left: -27px;
+            margin-bottom: 0;
+            @include fz(28);
+            @include transition(0.35s ease-in-out); 
+            z-index: 2;
+            
+            > i {
+                margin: 0;
+            }
+
+            &:hover {
+                background: $brand-primary;
+                color: $body-bg;
+            }
+
+            &.open {
+                border-radius: 0% 5em 5em 0%;
+                background: $brand-primary;
+                color: $body-bg;
+            }
+        }
+    }
+}
+
